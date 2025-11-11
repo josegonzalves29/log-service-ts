@@ -256,7 +256,7 @@ npx cdk deploy
 4. Provisions all resources
 5. Outputs Function URLs
 
-This usually takes about 60-90 seconds. Grab a coffee while CDK does its thing.
+This usually takes about 60-90 seconds. 
 
 ### Step 6: Get Your Function URLs
 
