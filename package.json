@@ -4,7 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "watch": "tsc -w",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "cdk": "cdk"
   },
   "keywords": [],
   "author": "",
@@ -13,7 +18,8 @@
     "@aws-sdk/client-dynamodb": "^3.928.0",
     "@aws-sdk/lib-dynamodb": "^3.928.0",
     "aws-cdk-lib": "^2.223.0",
-    "constructs": "^10.4.3"
+    "constructs": "^10.4.3",
+    "source-map-support": "^0.5.21"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.157",
@@ -21,6 +27,7 @@
     "@types/node": "^24.10.0",
     "@typescript-eslint/eslint-plugin": "^8.46.4",
     "@typescript-eslint/parser": "^8.46.4",
+    "aws-sdk-client-mock": "^4.1.0",
     "eslint": "^9.39.1",
     "jest": "^30.2.0",
     "prettier": "^3.6.2",
