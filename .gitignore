@@ -1,0 +1,11 @@
+node_modules/
+dist/
+cdk.out/
+.cdk.staging/ 
+*.js 
+*.d.ts
+*.log 
+coverage/
+.env
+.DS_Store
+
