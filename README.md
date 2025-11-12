@@ -2,11 +2,21 @@
 
 A serverless log aggregation service I built to learn AWS Lambda, DynamoDB, and Infrastructure as Code with AWS CDK.
 
-## Why I Built This
+## Table of Contents
 
-I wanted to understand how serverless architectures work in practice, especially DynamoDB's query patterns and how to structure data for efficient retrieval. This project helped me learn the difference between Query and Scan operations, and why choosing the right partition and sort keys matters for performance.
-
-The challenge was interesting: how do you efficiently retrieve the "100 most recent" items from a NoSQL database without scanning the entire table? The answer turned out to be using a fixed partition key with timestamps as the sort key.
+- [Requirements](#requirements)
+- [Architecture](#architecture)
+- [Database Design](#database-design)
+  - [Why DynamoDB?](#why-dynamodb)
+  - [DynamoDB Schema](#dynamodb-schema)
+- [Deployment Instructions](#deployment-instructions)
+- [Testing the Service](#testing-the-service)
+- [Testing](#testing)
+- [Project Structure](#project-structure)
+- [Cleanup](#cleanup-tear-down)
+- [What I Learned](#what-i-learned)
+- [Troubleshooting](#troubleshooting)
+- [Technologies Used](#technologies-used)
 
 ## Requirements
 
@@ -388,23 +398,27 @@ npx cdk destroy
 
 ## What I Learned
 
-Building this taught me several things about serverless development:
+I wanted to understand how serverless architectures work in practice, especially DynamoDB's query patterns and how to structure data for efficient retrieval. The main challenge was: how do you efficiently retrieve the "100 most recent" items from a NoSQL database without scanning the entire table? Turns out, using a fixed partition key with timestamps as the sort key was the answer.
 
 **DynamoDB Design Patterns**
 - The importance of access patterns in NoSQL design. I spent time upfront thinking about how the data would be queried, which shaped the entire schema.
 - Why Query operations are dramatically faster than Scans (milliseconds vs seconds on larger datasets).
+- Choosing between Unix timestamps vs ISO 8601 strings for sort keys - readability won over a few bytes of storage.
 
 **Lambda Best Practices**
 - Initialize AWS SDK clients outside the handler function - Lambda reuses containers, so this saves initialization time on subsequent invocations.
 - Keep functions focused - one responsibility per function makes testing and debugging much easier.
+- Understanding cold starts and how to minimize them.
 
 **Infrastructure as Code**
 - CDK's TypeScript API is much more intuitive than raw CloudFormation. Being able to use the same language for infrastructure and application code reduced context switching.
 - The deployment process (synth → diff → deploy) gives you confidence about what changes before they happen.
+- How IAM permissions work with `grantReadData` and `grantWriteData` - CDK handles the complexity.
 
 **Testing Serverless Functions**
 - Mocking AWS SDK calls is essential for fast, reliable tests. I used `aws-sdk-client-mock` which worked really well.
 - Achieving 100% test coverage forced me to think through edge cases I might have missed.
+- TDD helped catch issues like not handling `undefined` from DynamoDB when no items exist.
 
 
 ## Troubleshooting
