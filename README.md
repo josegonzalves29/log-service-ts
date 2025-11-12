@@ -12,8 +12,6 @@ A serverless log aggregation service I built to learn AWS Lambda, DynamoDB, and 
 - [Deployment Instructions](#deployment-instructions)
 - [Testing the Service](#testing-the-service)
 - [Testing](#testing)
-- [Project Structure](#project-structure)
-- [Cleanup](#cleanup-tear-down)
 - [What I Learned](#what-i-learned)
 - [Troubleshooting](#troubleshooting)
 - [Technologies Used](#technologies-used)
@@ -354,47 +352,6 @@ Writing tests first (TDD-style) helped me catch issues like forgetting to handle
    - Sorted by newest first
    - All fields present
 
-## Project Structure
-
-```
-log-service-ts/
-├── bin/
-│   └── app.ts                    # CDK app entry point
-├── lib/
-│   └── log-stack.ts              # Infrastructure definition
-├── lambda/
-│   ├── ingest/
-│   │   ├── index.ts              # Ingest handler
-│   │   └── types.ts              # Type definitions
-│   └── readRecent/
-│       ├── index.ts              # ReadRecent handler
-│       └── types.ts              # Type definitions
-├── test/
-│   ├── ingest.test.ts            # Ingest tests
-│   └── readRecent.test.ts        # ReadRecent tests
-├── cdk.json                      # CDK configuration
-├── jest.config.ts                # Jest test configuration
-├── tsconfig.json                 # TypeScript configuration
-├── package.json                  # Dependencies
-└── README.md                     # This file
-```
-
-## Cleanup (Tear Down)
-
-To remove all AWS resources and avoid charges:
-
-```bash
-npx cdk destroy
-```
-
-**This deletes:**
-- Lambda functions (both)
-- DynamoDB table (including all data!)
-- IAM roles and policies
-- CloudWatch log groups
-- Function URLs
-
-**Confirmation required** - type `y` to confirm deletion.
 
 ## What I Learned
 
