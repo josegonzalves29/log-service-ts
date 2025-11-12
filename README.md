@@ -279,7 +279,8 @@ Stack ARN:
 arn:aws:cloudformation:af-south-1:123456789:stack/LogServiceStack/...
 ```
 
-**Save these URLs** - you'll use them to interact with your service!
+<img width="1507" height="564" alt="Screenshot 2025-11-12 at 10 08 14" src="https://github.com/user-attachments/assets/cadc592b-fd97-4974-8699-604cad3ea09e" />
+
 
 ## Testing the Service
 
@@ -311,6 +312,7 @@ You can also test directly in the AWS Lambda console if you prefer a GUI - just 
 # Run all tests
 npm test
 ```
+<img width="580" height="233" alt="Screenshot 2025-11-12 at 10 08 52" src="https://github.com/user-attachments/assets/3e8aa68e-3d20-4755-8a59-85108ba9cde6" />
 
 I wrote 14 tests covering both Lambda functions with 100% code coverage. The tests cover:
 
